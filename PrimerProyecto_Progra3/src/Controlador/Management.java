@@ -2,5 +2,7 @@ package Controlador;
 
 public class Management {
 
-	//private
+	public Management() {
+		// TODO Auto-generated constructor stub
+	}
 }
