@@ -3,13 +3,13 @@ package Modelo;
 public class TreeNode<T> {
 
 	
-	private TreeNode<T> letf;
+	private TreeNode<T> left;
 	private TreeNode<T> right;
 	private T info;
 	
 	
 	public TreeNode( T info) {
-		letf=null;
+		left=null;
 		right=null;
 		this.info = info;
 	}
@@ -17,14 +17,14 @@ public class TreeNode<T> {
 	
 	
 	
-	public TreeNode<T> getLetf() {
-		return letf;
+	public TreeNode<T> getLeft() {
+		return left;
 	}
 
 
 
-	public void setLetf(TreeNode<T> letf) {
-		this.letf = letf;
+	public void setLetf(TreeNode<T> left) {
+		this.left = left;
 	}
 
 

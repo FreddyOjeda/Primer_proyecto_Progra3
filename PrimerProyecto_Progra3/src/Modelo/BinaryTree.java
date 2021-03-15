@@ -35,7 +35,7 @@ public class BinaryTree<T> {
 			TreeNode<T> ant= null;
 			while(aux != null){
 				ant=aux;
-			aux=comparator.compare(aux.getInfo(), newNode.getInfo())>0 ? aux.getLetf():aux.getRight();
+			aux=comparator.compare(aux.getInfo(), newNode.getInfo())>0 ? aux.getLeft():aux.getRight();
 					
 			}
 			if(comparator.compare(ant.getInfo(), newNode.getInfo())>0){
@@ -54,15 +54,35 @@ public class BinaryTree<T> {
 			if(comparator.compare(aux.getInfo(), info)==0){
 				return aux;
 			}
-			aux= comparator.compare(aux.getInfo(), info)<0? aux.getRight() : aux.getLetf();
+			aux= comparator.compare(aux.getInfo(), info)<0? aux.getRight() : aux.getLeft();
 		}	
 		return null;
 	}
 
+	
+	// ENLISTAR EN ORDEN 
+
+	public ArrayList<T> listInorden(){
+		arrayList= new ArrayList<>();
+		inorden(root);
+		return arrayList;
+
+	}
+	private void inorden(TreeNode<T> root) {
+		if(root != null) {
+			inorden(root.getLeft());
+			arrayList.add(root.getInfo());
+			inorden(root.getRight());
+		}
+	}
+	
+	
+	
+	
 
 	private void heigt(TreeNode<T> node,int level) {
 		if(node != null) {
-			heigt(node.getLetf(), level+1);
+			heigt(node.getLeft(), level+1);
 			aux=level>aux?level:aux;
 			heigt(node.getRight(), level+1);
 		}
@@ -84,7 +104,7 @@ public class BinaryTree<T> {
 
 	private int weigth(TreeNode<T> node) {
 		if(node!=null) {
-			return 1+(weigth(node.getLetf())+(weigth(node.getRight())));
+			return 1+(weigth(node.getLeft())+(weigth(node.getRight())));
 		}
 		return 0;
 	}
@@ -96,9 +116,9 @@ public class BinaryTree<T> {
 		}else{
 			int cont=1;
 			TreeNode<T> aux=root;
-			while(aux.getLetf() != node && aux.getRight() != node){
+			while(aux.getLeft() != node && aux.getRight() != node){
 				cont++;
-				aux= comparator.compare(aux.getInfo(), node.getInfo())<0 ? aux.getRight():aux.getLetf();
+				aux= comparator.compare(aux.getInfo(), node.getInfo())<0 ? aux.getRight():aux.getLeft();
 			}
 			return cont;
 		}
@@ -107,7 +127,7 @@ public class BinaryTree<T> {
 
 
 	public boolean isSheet(TreeNode<T>info){
-		if (info.getLetf()==null && info.getRight()==null) {
+		if (info.getLeft()==null && info.getRight()==null) {
 			return true;
 		}else {
 		return false;
@@ -116,9 +136,9 @@ public class BinaryTree<T> {
 
 
 	public byte	 gradeNode(TreeNode<T> node) {
-		if (node.getRight() != null && node.getLetf() != null) {
+		if (node.getRight() != null && node.getLeft() != null) {
 			return 2;
-		} else if (node.getRight() != null || node.getLetf() != null) {
+		} else if (node.getRight() != null || node.getLeft() != null) {
 			return 1;
 		} else {
 			return 0;
@@ -136,7 +156,7 @@ public class BinaryTree<T> {
 	private void preSort(TreeNode<T> node){
 		if(node != null){
 			arrayList.add(node.getInfo());
-			preSort(node.getLetf());
+			preSort(node.getLeft());
 			preSort(node.getRight());
 		}
 	}
@@ -149,7 +169,7 @@ public class BinaryTree<T> {
 	
 	private void inSort(TreeNode<T> node) {
 		if (node != null) {
-			inSort(node.getLetf());
+			inSort(node.getLeft());
 			arrayList.add(node.getInfo());
 			inSort(node.getRight());
 		}	
@@ -165,7 +185,7 @@ public class BinaryTree<T> {
 	{
 		if (node!=null)
 		{
-			posort(node.getLetf());
+			posort(node.getLeft());
 			posort(node.getRight());
 			arrayList.add(node.getInfo());
 		}
@@ -176,8 +196,8 @@ public class BinaryTree<T> {
 	        return null;
 	    }
 	    TreeNode< T > aux = root;
-	    while( aux.getLetf() != node && aux.getRight() != node ){
-	        aux =comparator.compare( aux.getInfo() ,node.getInfo() ) > 0 ? aux.getLetf() : aux.getRight();
+	    while( aux.getLeft() != node && aux.getRight() != node ){
+	        aux =comparator.compare( aux.getInfo() ,node.getInfo() ) > 0 ? aux.getLeft() : aux.getRight();
 	    }
 	    
 	    return aux;
@@ -190,8 +210,8 @@ public class BinaryTree<T> {
 		tail.add(root);
 		while(! tail.isEmpty()){
 			TreeNode<T>aux= tail.poll();
-			if(aux.getLetf() !=null){
-				tail.add(aux.getLetf());
+			if(aux.getLeft() !=null){
+				tail.add(aux.getLeft());
 			}
 			if( aux.getRight() != null){
 				tail.add(aux.getRight());
@@ -209,8 +229,8 @@ public class BinaryTree<T> {
 		tail.add(root);
 		while(! tail.isEmpty()){
 			TreeNode<T>aux= tail.poll();
-			if(aux.getLetf() !=null){
-				tail.addFirst(aux.getLetf());
+			if(aux.getLeft() !=null){
+				tail.addFirst(aux.getLeft());
 			}
 			if( aux.getRight() != null){
 				tail.addFirst(aux.getRight());
@@ -240,20 +260,20 @@ public class BinaryTree<T> {
 	public void deleteNodeWhithSons(TreeNode<T> node) {
 	 TreeNode<T>sustitutte= node.getRight();
 	 TreeNode<T>fatherSustitute=null;
-	 	while(sustitutte.getLetf()!=null){
+	 	while(sustitutte.getLeft()!=null){
 	 		fatherSustitute=sustitutte;
-	 		sustitutte=sustitutte.getLetf();
+	 		sustitutte=sustitutte.getLeft();
 	  }
 	 	if(fatherSustitute !=null){
 	 		fatherSustitute.setLetf(sustitutte.getRight());
 	 		sustitutte.setRight(node.getRight());
 		
 	}
-	sustitutte.setLetf(node.getLetf());
+	sustitutte.setLetf(node.getLeft());
 	TreeNode<T>father=findFather(node);
 		if(father ==null){
 			root=sustitutte;
-		}else if(father.getLetf()==node){
+		}else if(father.getLeft()==node){
 			father.setLetf(sustitutte);
 		
 		}else{
@@ -265,13 +285,13 @@ public class BinaryTree<T> {
 
 	public void deleteNodeWhithSon(TreeNode<T> node) {
 		if(node==root) {
-			root=node.getLetf() !=null ? node.getLetf():node.getRight();
+			root=node.getLeft() !=null ? node.getLeft():node.getRight();
 		}else {
 			TreeNode<T> father=findFather(node);
-			if(father.getLetf()==node) {
-				father.setLetf(node.getLetf()!=null?node.getLetf():node.getRight());
+			if(father.getLeft()==node) {
+				father.setLetf(node.getLeft()!=null?node.getLeft():node.getRight());
 			}else {
-				father.setRight(node.getLetf()!=null?node.getLetf():node.getRight());
+				father.setRight(node.getLeft()!=null?node.getLeft():node.getRight());
 			}
 		}
 		
@@ -294,7 +314,7 @@ public class BinaryTree<T> {
 	
 	public boolean isBalanced() {
 		int right = heigtNode(root.getRight());
-		int left = heigtNode(root.getLetf());
+		int left = heigtNode(root.getLeft());
 		int rest=0;
 		if (right>=left) {
 			rest = right-left;
@@ -318,7 +338,7 @@ public class BinaryTree<T> {
 				cont++;
 			}
 			if(node != null){
-				counter(level, node.getLetf());
+				counter(level, node.getLeft());
 				counter(level, node.getRight());
 			}
 		}
