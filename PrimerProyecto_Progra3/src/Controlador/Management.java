@@ -1,6 +1,6 @@
 package Controlador;
 
-import java.util.ArrayList;
+import java.util.ArrayList;import javax.swing.JLabel;
 
 import Modelo.BinaryTree;
 import Modelo.Word;
@@ -38,7 +38,10 @@ public class Management{
 	
 	public void addWord(String name, String meaning, String translation){
 
-		// PONER EN MINUSCLAS ATRIBUTOS
+		// PONE EN MINUSCLAS LOS ATRIBUTOS
+		name = name.toLowerCase();
+		meaning = meaning.toLowerCase();
+		translation = meaning.toLowerCase();
 
 		dictionary.get(getIndex(name)).addNode(new Word(name, meaning, translation));
 	}
@@ -89,6 +92,15 @@ public class Management{
 		}
 
 		return outputList;
+	}
+	
+	public boolean singnUp(String user, String pass) {
+		
+		if ((user.equalsIgnoreCase("freddy.ojeda") && pass.equalsIgnoreCase("201911519")) || (user.equalsIgnoreCase("felipe.dueñas") && pass.equalsIgnoreCase("201910985"))) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }

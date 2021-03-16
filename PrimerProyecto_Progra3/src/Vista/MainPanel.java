@@ -21,6 +21,7 @@ public class MainPanel extends JPanel{
 	JButton delete;
 	JPanel panel_;
 	JPanel editPanel;
+	JComboBox box ;
 	
 	public MainPanel() {
 		this.setOpaque(true);
@@ -48,7 +49,7 @@ public class MainPanel extends JPanel{
 	
 	private void addComboBox() {
 		String [] filters = {"Todo","A","B","C","D","E","F","G","H","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; 
-		JComboBox box = new JComboBox(filters);
+		box = new JComboBox(filters);
 		box.setBounds(130,57,120,20);
 		this.add(box);
 	}
@@ -93,6 +94,12 @@ public class MainPanel extends JPanel{
 		JScrollPane jScrollPane = new JScrollPane(jTable);
 		contenedor.add(jScrollPane);
 	}
+	
+	public void addEditPanel() {
+		JPanel editpanel = new JPanel();
+		editpanel.setBackground(Color.black);
+		getPanel_().add(editPanel);
+	}
 
 	public JButton getAdd() {
 		return add;
@@ -125,6 +132,15 @@ public class MainPanel extends JPanel{
 	public void setPanel_(JPanel panel_) {
 		this.panel_ = panel_;
 	}
+
+	public JComboBox getBox() {
+		return box;
+	}
+
+	public void setBox(JComboBox box) {
+		this.box = box;
+	}
+	
 	
 	
 }
