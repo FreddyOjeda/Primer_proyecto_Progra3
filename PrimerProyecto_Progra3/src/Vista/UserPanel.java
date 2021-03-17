@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 public class UserPanel extends JPanel{
@@ -23,18 +24,56 @@ public class UserPanel extends JPanel{
 	JButton home;
 	private JButton button;
 	DefaultTableModel defaultTableModel;
+	private JTable jTable;
+	
+	private JTextArea meaning;
+	private JLabel nameview;
+	private JLabel translation;
 	
 	public UserPanel() {
 		this.setOpaque(true);
 		this.setLayout(null);
 		
+		addLabels();
 		addComponents();
 		addComboBox();
 		addTable();
-		addLabels();
+		addApearence();
 	}
 	
 	private void addLabels() {
+		nameview = new JLabel();
+		nameview.setText("");
+		nameview.setBounds(500, 100, 50, 20);
+		this.add(nameview);
+		
+		meaning = new JTextArea();
+		meaning.setText("");
+		meaning.setBounds(550, 170, 160, 80);
+		meaning.setLineWrap(true);
+		meaning.setEditable(false);
+		this.add(meaning);
+		
+		translation = new JLabel();
+		translation.setText("");
+		translation.setBounds(700, 100, 100, 20);
+		this.add(translation);
+		
+		JLabel label = new JLabel("Palabra: ");
+		label.setBounds(500, 80, 50, 20);
+		this.add(label);
+		
+		JLabel label2 = new JLabel("Traduccion: ");
+		label2.setBounds(700, 80, 100, 20);
+		this.add(label2);
+		
+		JLabel label3 = new JLabel("Significado: ");
+		label3.setBounds(600, 150, 100, 20);
+		this.add(label3);
+		
+	}
+
+	private void addApearence() {
 		JLabel loge = new JLabel();
 		loge.setBounds(620, 460, 300, 170);
 		ImageIcon img = new ImageIcon("src\\Vista\\Images\\Logo.png");
@@ -54,6 +93,7 @@ public class UserPanel extends JPanel{
 		JPanel panel = new JPanel();
 		panel.setBounds(400, 50, 450, 250);
 		panel.setBorder(BorderFactory.createTitledBorder("Datos: ")); 
+		panel.setOpaque(true);
 		this.add(panel);
 		
 		home = new JButton();
@@ -77,7 +117,7 @@ public class UserPanel extends JPanel{
 	
 	private void addTable() {
 		JPanel contenedor = new JPanel();
-		contenedor.setBorder(BorderFactory.createTitledBorder("Palabras")); 
+		//contenedor.setBorder(BorderFactory.createTitledBorder("Palabras")); 
 		contenedor.setBackground(new Color(0,0,0,0));
 		contenedor.setBounds(70,97,240,509);
 		this.add(contenedor);
@@ -88,7 +128,7 @@ public class UserPanel extends JPanel{
 		//DefaultTableModel defaultTableModel = new DefaultTableModel();
 		defaultTableModel.setColumnIdentifiers(ColumnNames);
 		
-		JTable jTable = new JTable(defaultTableModel) {
+		jTable = new JTable(defaultTableModel) {
 			@Override
 			public Dimension getPreferredScrollableViewportSize() {
 				return new Dimension(225, 455);
@@ -129,7 +169,42 @@ public class UserPanel extends JPanel{
 	public void setButton(JButton button) {
 		this.button = button;
 	}
-	
+
+	public JTable getjTable() {
+		return jTable;
+	}
+
+	public void setjTable(JTable jTable) {
+		this.jTable = jTable;
+	}
+
+	public void setDefaultTableModel(DefaultTableModel defaultTableModel) {
+		this.defaultTableModel = defaultTableModel;
+	}
+
+	public JTextArea getMeaning() {
+		return meaning;
+	}
+
+	public void setMeaning(JTextArea meaning) {
+		this.meaning = meaning;
+	}
+
+	public JLabel getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(JLabel translation) {
+		this.translation = translation;
+	}
+
+	public JLabel getNameview() {
+		return nameview;
+	}
+
+	public void setNameview(JLabel nameview) {
+		this.nameview = nameview;
+	}
 	
 	
 	

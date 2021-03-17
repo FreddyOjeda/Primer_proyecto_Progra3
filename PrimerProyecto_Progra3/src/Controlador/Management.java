@@ -167,7 +167,7 @@ public class Management{
 	
 	public boolean singnUp(String user, String pass) {
 
-		if ((user.equalsIgnoreCase("freddy.ojeda") && pass.equalsIgnoreCase("201911519")) || (user.equalsIgnoreCase("") && pass.equalsIgnoreCase(""))) {
+		if ((user.equalsIgnoreCase("freddy.ojeda") && pass.equalsIgnoreCase("201911519")) || (user.equalsIgnoreCase("felipe.dueñas") && pass.equalsIgnoreCase("201910985"))) {
 			return true;
 		}
 

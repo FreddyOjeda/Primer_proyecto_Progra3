@@ -118,7 +118,18 @@ public class Consola extends JFrame{
 
 
 				if (userPanel.getButton().equals(e.getSource())) {
-
+					int numRow = userPanel.getjTable().getSelectedRow();
+					if (numRow>=0) {
+						String name = userPanel.getjTable().getValueAt(numRow, 0).toString();
+						String meaning = userPanel.getjTable().getValueAt(numRow, 1).toString();
+						String translation = userPanel.getjTable().getValueAt(numRow, 2).toString();
+						userPanel.getNameview().setText(name);
+						userPanel.getMeaning().setText(meaning);
+						userPanel.getTranslation().setText(translation);
+					}else {
+						JOptionPane.showMessageDialog(null, "Por favor seleccione una palabra");
+					}
+					
 				}
 
 				// MOSTRAR PALABRAS EN LA TABLA
