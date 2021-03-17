@@ -1,6 +1,10 @@
 package Vista;
 
+import java.awt.Image;
+
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +18,7 @@ public class AdministratorPanel extends JPanel{
 	private JButton delete;
 	private JButton searchEdit;
 	private JButton searchDelete;
+	private JButton signOut;
 	
 	private JTextField nameAdd;
 	private JTextField translationAdd;
@@ -54,6 +59,23 @@ public class AdministratorPanel extends JPanel{
 		this.add(panel1);
 		this.add(panel2);
 		this.add(panel3);
+		addFonts();
+	}
+	
+	private void addFonts() {
+		JLabel loge = new JLabel();
+		loge.setBounds(620, 460, 300, 170);
+		ImageIcon img = new ImageIcon("src\\Vista\\Images\\Logo.png");
+		Icon icone = new ImageIcon(img.getImage().getScaledInstance(loge.getWidth(), loge.getHeight(), Image.SCALE_DEFAULT));
+		loge.setIcon(icone);
+		this.add(loge);
+		
+		JLabel font3 = new JLabel();
+		font3.setBounds(0, 0, 950, 650);
+		ImageIcon image = new ImageIcon("src\\Vista\\Images\\fondo.jpg");
+		Icon icon = new ImageIcon(image.getImage().getScaledInstance(font3.getWidth(), font3.getHeight(), Image.SCALE_DEFAULT));
+		font3.setIcon(icon);
+		this.add(font3);
 	}
 	
 	private void addButtons() {
@@ -81,6 +103,11 @@ public class AdministratorPanel extends JPanel{
 		searchDelete.setText("Buscar");
 		searchDelete.setBounds(700, 170,150,20);
 		this.add(searchDelete);
+		
+		signOut = new JButton();
+		signOut.setText("Cerrar Sesion");
+		signOut.setBounds(20, 20, 115, 20);
+		this.add(signOut);
 	}
 	
 	private void addTextFields() {
@@ -295,6 +322,14 @@ public class AdministratorPanel extends JPanel{
 
 	public void setMeaningDelete(JTextArea meaningDelete) {
 		this.meaningDelete = meaningDelete;
+	}
+
+	public JButton getSignOut() {
+		return signOut;
+	}
+
+	public void setSignOut(JButton signOut) {
+		this.signOut = signOut;
 	}
 	
 	

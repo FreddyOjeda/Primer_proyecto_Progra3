@@ -13,12 +13,15 @@ public class Consola extends JFrame{
 	private Management management;
 	
 	private MainPanel mainPanel;
+	
+	private UserPanel userPanel;
 	private LoginPanel loginPanel;
 	private AdministratorPanel administratorPanel;
 	
 	public Consola() {
 		management = new Management();
 		mainPanel = new MainPanel();
+		userPanel = new UserPanel();
 		loginPanel = new LoginPanel();
 		administratorPanel = new AdministratorPanel();
 		
@@ -28,20 +31,20 @@ public class Consola extends JFrame{
 		this.setTitle("Diccionario (Felipe Dueñas - Freddy Ojeda)");
 		this.setResizable(false);
 		
-		//addMainPanel();
-		addLoginPanel();
-		//addAdministratorPanel();
+		//addUserPanel();
+		//addLoginPanel();
+		addMainPanel();
 		events();
 	}
 	
-	//Control del panel principal.
-	public void addMainPanel() {
-		this.add(mainPanel);
-		mainPanel.setVisible(true);
+	//Control del panel del usuario.
+	private void addUserPanel() {
+		this.add(userPanel);
+		userPanel.setVisible(true);
 	}
-	public void removeMainPanel() {
-		mainPanel.setVisible(false);
-		this.remove(mainPanel);
+	private void removeUserPanel() {
+		userPanel.setVisible(false);
+		this.remove(userPanel);
 	}
 	
 	//Control del panel de iniciar sesion.
@@ -64,11 +67,30 @@ public class Consola extends JFrame{
 		this.remove(administratorPanel);
 	}
 	
+	//Control del panel principal
+	private void addMainPanel() {
+		this.add(mainPanel);
+		mainPanel.setVisible(true);
+	}
+	private void removeMainPanel() {
+		mainPanel.setVisible(false);
+		this.remove(mainPanel);
+	}
+	
 	private void events() {
 		ActionListener action = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//ACCIONES DEL PANEL PRINCIPAL
+				if (mainPanel.getUsers().equals(e.getSource())) {
+					removeMainPanel();
+					addUserPanel();
+				}
+				if (mainPanel.getAdministrator().equals(e.getSource())) {
+					removeMainPanel();
+					addLoginPanel();
+				}
 				
 				//ACCIONES DEL PANEL INICIAR SESION
 				if (loginPanel.getLoginButton().equals(e.getSource())) {
@@ -83,6 +105,19 @@ public class Consola extends JFrame{
 						loginPanel.getPassword().setText("");
 					}
 				}
+				if (loginPanel.getHome().equals(e.getSource())) {
+					removeLoginpanel();
+					addMainPanel();
+				}
+				
+				//ACCIONES DEL PANEL DE USUARIO
+				if (userPanel.getHome().equals(e.getSource())) {
+					removeUserPanel();
+					addMainPanel();
+				}
+				if (userPanel.getButton().equals(e.getSource())) {
+					
+				}
 				
 				//ACCIONES DEL PANEL DE ADMINISTRADOR
 				if (administratorPanel.getAdd().equals(e.getSource())) {
@@ -91,13 +126,26 @@ public class Consola extends JFrame{
 					administratorPanel.getMeaningAdd().setText("");
 					administratorPanel.getTranslationAdd().setText("");
 				}
+				
+				if (administratorPanel.getSignOut().equals(e.getSource())) {
+					removeAdministratorPanel();
+					addMainPanel();
+				}
 			}
 		};
+		
+		mainPanel.getUsers().addActionListener(action);
+		mainPanel.getAdministrator().addActionListener(action);
 		loginPanel.getLoginButton().addActionListener(action);
-		mainPanel.getEdit().addActionListener(action);
+		loginPanel.getHome().addActionListener(action);
+		
+		userPanel.getHome().addActionListener(action);
+		userPanel.getButton().addActionListener(action);
+		
 		administratorPanel.getAdd().addActionListener(action);
 		administratorPanel.getEdit().addActionListener(action);
 		administratorPanel.getDelete().addActionListener(action);
+		administratorPanel.getSignOut().addActionListener(action);
 	}
 
 }

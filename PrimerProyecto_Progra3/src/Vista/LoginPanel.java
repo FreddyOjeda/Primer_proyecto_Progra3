@@ -1,6 +1,11 @@
 package Vista;
 
+import java.awt.Color;
+import java.awt.Image;
+
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +17,7 @@ public class LoginPanel extends JPanel{
 	private JTextField userName;
 	private JPasswordField password;
 	private JButton loginButton;
+	private JButton home;
 	
 	public LoginPanel() {
 		this.setOpaque(true);
@@ -20,14 +26,33 @@ public class LoginPanel extends JPanel{
 		JPanel panel = new JPanel();
 		panel.setBounds(375, 170, 200, 230);
 		panel.setBorder(BorderFactory.createTitledBorder("Login"));
+		panel.setBackground(Color.WHITE);
 		panel.setOpaque(true);
 		
-		addLabels();
+		
 		addButtons();
 		addTextFields();
+		addLabels();
 		this.add(panel);
+		addFonts();
 	}
 	
+	private void addFonts() {
+		JLabel loge = new JLabel();
+		loge.setBounds(620, 460, 300, 170);
+		ImageIcon img = new ImageIcon("src\\Vista\\Images\\Logo.png");
+		Icon icone = new ImageIcon(img.getImage().getScaledInstance(loge.getWidth(), loge.getHeight(), Image.SCALE_DEFAULT));
+		loge.setIcon(icone);
+		this.add(loge);
+		
+		JLabel font3 = new JLabel();
+		font3.setBounds(0, 0, 950, 650);
+		ImageIcon image = new ImageIcon("src\\Vista\\Images\\fondo.jpg");
+		Icon icon = new ImageIcon(image.getImage().getScaledInstance(font3.getWidth(), font3.getHeight(), Image.SCALE_DEFAULT));
+		font3.setIcon(icon);
+		this.add(font3);
+	}
+
 	private void addLabels() {
 		JLabel label1 = new JLabel();
 		label1.setText("Usuario: ");
@@ -55,6 +80,11 @@ public class LoginPanel extends JPanel{
 		loginButton.setText("Iniciar Sesion");
 		loginButton.setBounds(400, 340, 150, 20);
 		this.add(loginButton);
+		
+		home = new JButton();
+		home.setText("Volver");
+		home.setBounds(20, 20, 80, 20);
+		this.add(home);
 	}
 
 	public JTextField getUserName() {
@@ -79,6 +109,14 @@ public class LoginPanel extends JPanel{
 
 	public void setPassword(JPasswordField password) {
 		this.password = password;
+	}
+
+	public JButton getHome() {
+		return home;
+	}
+
+	public void setHome(JButton home) {
+		this.home = home;
 	}
 	
 	

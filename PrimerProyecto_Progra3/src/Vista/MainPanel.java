@@ -1,146 +1,103 @@
 package Vista;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Font;
+import java.awt.Image;
 
-import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class MainPanel extends JPanel{
 
-	JButton add;
-	JButton edit;
-	JButton delete;
-	JPanel panel_;
-	JPanel editPanel;
-	JComboBox box ;
+	private JButton users;
+	private JButton administrator;
 	
 	public MainPanel() {
 		this.setOpaque(true);
 		this.setLayout(null);
 		
-		addComponents();
-		addComboBox();
 		addButtons();
-		addTable();
+		addLabels();
+		addPanels();
 	}
-	
-	private void addComponents() {
+
+	private void addPanels() {
 		JPanel panel = new JPanel();
-		//panel.add(new JLabel("foo"));
-		panel.setBounds(400, 50, 450, 250);
-		panel.setBorder(BorderFactory.createTitledBorder("Datos: ")); 
+		panel.setBackground(Color.BLACK);
+		panel.setBounds(0, 0, 950, 150);
 		this.add(panel);
+	}
+
+	private void addLabels() {
+		JLabel title = new JLabel("DICCIONARIO");
+		title.setBounds(225, 10, 500, 120);
+		title.setHorizontalAlignment(JLabel.CENTER);
+		title.setVerticalAlignment(JLabel.CENTER);
+		title.setFont(new Font("Agency FB", Font.BOLD, 80));
+		this.add(title);
 		
-		panel_ = new JPanel();
-		//panel.add(new JLabel("foo"));
-		panel_.setBounds(400, 355, 450, 250);
-		panel_.setBorder(BorderFactory.createTitledBorder("")); 
-		this.add(panel_);
+		JLabel subTitle = new JLabel("(Español - English)");
+		subTitle.setBounds(490, 90, 200, 50);
+		subTitle.setHorizontalAlignment(JLabel.CENTER);
+		subTitle.setVerticalAlignment(JLabel.CENTER);
+		subTitle.setFont(new Font("Agency FB", Font.BOLD, 20));
+		this.add(subTitle);
+		
+		JLabel font1 = new JLabel();
+		font1.setBounds(0, 0, 950, 150);
+		font1.setIcon(new ImageIcon("src\\Vista\\Images\\barra-amarilla.png"));
+		this.add(font1);
+		
+		JLabel font2 = new JLabel();
+		font2.setBounds(400, 150, 950, 100);
+		font2.setIcon(new ImageIcon("src\\Vista\\Images\\barra2.jpg"));
+		this.add(font2);
+		
+		JLabel loge = new JLabel();
+		loge.setBounds(620, 460, 300, 170);
+		ImageIcon img = new ImageIcon("src\\Vista\\Images\\Logo.png");
+		Icon icone = new ImageIcon(img.getImage().getScaledInstance(loge.getWidth(), loge.getHeight(), Image.SCALE_DEFAULT));
+		loge.setIcon(icone);
+		this.add(loge);
+		
+		JLabel font3 = new JLabel();
+		font3.setBounds(0, 241, 950, 400);
+		ImageIcon image = new ImageIcon("src\\Vista\\Images\\fondo.jpg");
+		Icon icon = new ImageIcon(image.getImage().getScaledInstance(font3.getWidth(), font3.getHeight(), Image.SCALE_DEFAULT));
+		font3.setIcon(icon);
+		this.add(font3);
 	}
-	
-	private void addComboBox() {
-		String [] filters = {"Todo","A","B","C","D","E","F","G","H","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; 
-		box = new JComboBox(filters);
-		box.setBounds(130,57,120,20);
-		this.add(box);
-	}
-	
+
 	private void addButtons() {
-		add = new JButton();
-		add.setBounds(400, 330, 100, 25);
-		add.setText("Agregar");
-		this.add(add);
+		users = new JButton();
+		users.setText("Usuario");
+		users.setBounds(0, 150, 200, 100);
+		this.add(users);
 		
-		edit = new JButton();
-		edit.setBounds(500, 330, 100, 25);
-		edit.setText("Editar");
-		this.add(edit);
-		
-		delete = new JButton();
-		delete.setBounds(600, 330, 100, 25);
-		delete.setText("Eliminar");
-		this.add(delete);
-	}
-	
-	private void addTable() {
-		JPanel contenedor = new JPanel();
-		contenedor.setBorder(BorderFactory.createTitledBorder("Palabras")); 
-		contenedor.setBackground(new Color(0,0,0,0));
-		contenedor.setBounds(70,97,240,509);
-		this.add(contenedor);
-		
-		String [] ColumnNames = {"Palabra","Definicion","Traduccion"};
-		DefaultTableModel defaultTableModel = new DefaultTableModel();
-		defaultTableModel.setColumnIdentifiers(ColumnNames);
-		
-		JTable jTable = new JTable(defaultTableModel) {
-			@Override
-			public Dimension getPreferredScrollableViewportSize() {
-				return new Dimension(225, 455);
-			}
-		};
-		
-		jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		
-		JScrollPane jScrollPane = new JScrollPane(jTable);
-		contenedor.add(jScrollPane);
-	}
-	
-	public void addEditPanel() {
-		JPanel editpanel = new JPanel();
-		editpanel.setBackground(Color.black);
-		getPanel_().add(editPanel);
+		administrator = new JButton();
+		administrator.setText("Administrador");
+		administrator.setBounds(200, 150, 200, 100);
+		this.add(administrator);
 	}
 
-	public JButton getAdd() {
-		return add;
+	public JButton getUsers() {
+		return users;
 	}
 
-	public void setAdd(JButton add) {
-		this.add = add;
+	public void setUsers(JButton users) {
+		this.users = users;
 	}
 
-	public JButton getEdit() {
-		return edit;
+	public JButton getAdministrator() {
+		return administrator;
 	}
 
-	public void setEdit(JButton edit) {
-		this.edit = edit;
+	public void setAdministrator(JButton administrator) {
+		this.administrator = administrator;
 	}
-
-	public JButton getDelete() {
-		return delete;
-	}
-
-	public void setDelete(JButton delete) {
-		this.delete = delete;
-	}
-
-	public JPanel getPanel_() {
-		return panel_;
-	}
-
-	public void setPanel_(JPanel panel_) {
-		this.panel_ = panel_;
-	}
-
-	public JComboBox getBox() {
-		return box;
-	}
-
-	public void setBox(JComboBox box) {
-		this.box = box;
-	}
-	
 	
 	
 }
