@@ -66,8 +66,8 @@ public class BinaryTree<T> {
 		arrayList= new ArrayList<>();
 		inorden(root);
 		return arrayList;
-
 	}
+	
 	private void inorden(TreeNode<T> root) {
 		if(root != null) {
 			inorden(root.getLeft());

@@ -44,9 +44,12 @@ public class Word {
 	}
 	
 	
+	
 	@Override
 	public String toString() {
 		return name+";"+meaning+";"+translation;
 	}
+	
+	
 	
 }

@@ -19,9 +19,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class UserPanel extends JPanel{
 
-	JComboBox box ;
+	JComboBox box;
 	JButton home;
 	private JButton button;
+	DefaultTableModel defaultTableModel;
 	
 	public UserPanel() {
 		this.setOpaque(true);
@@ -82,7 +83,9 @@ public class UserPanel extends JPanel{
 		this.add(contenedor);
 		
 		String [] ColumnNames = {"Palabra","Definicion","Traduccion"};
-		DefaultTableModel defaultTableModel = new DefaultTableModel();
+		
+		defaultTableModel = new DefaultTableModel();
+		//DefaultTableModel defaultTableModel = new DefaultTableModel();
 		defaultTableModel.setColumnIdentifiers(ColumnNames);
 		
 		JTable jTable = new JTable(defaultTableModel) {
@@ -98,6 +101,11 @@ public class UserPanel extends JPanel{
 		contenedor.add(jScrollPane);
 	}	
 
+	
+	public DefaultTableModel getDefaultTableModel() {
+		return defaultTableModel;
+	}
+	
 	public JComboBox getBox() {
 		return box;
 	}
@@ -121,6 +129,7 @@ public class UserPanel extends JPanel{
 	public void setButton(JButton button) {
 		this.button = button;
 	}
+	
 	
 	
 	

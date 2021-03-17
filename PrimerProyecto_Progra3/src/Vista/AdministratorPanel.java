@@ -129,10 +129,12 @@ public class AdministratorPanel extends JPanel{
 		
 		translationEdit = new JTextField();
 		translationEdit.setBounds(400, 430, 150, 20);
+		translationEdit.setEnabled(false);
 		this.add(translationEdit);
 		
 		translationDelete = new JTextField();
 		translationDelete.setBounds(700, 430, 150, 20);
+		translationDelete.setEditable(false);
 		this.add(translationDelete);
 	}
 	
@@ -147,12 +149,14 @@ public class AdministratorPanel extends JPanel{
 		meaningEdit.setBounds(400, 240, 150, 110);
 		meaningEdit.setBorder(BorderFactory.createTitledBorder(""));
 		meaningEdit.setLineWrap(true);
+		meaningEdit.setEnabled(false);
 		this.add(meaningEdit);
 		
 		meaningDelete = new JTextArea();
 		meaningDelete.setBounds(700, 240, 150, 110);
 		meaningDelete.setBorder(BorderFactory.createTitledBorder(""));
 		meaningDelete.setLineWrap(true);
+		meaningDelete.setEditable(false);
 		this.add(meaningDelete);
 		
 	}
