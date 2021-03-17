@@ -109,7 +109,7 @@ public class UserPanel extends JPanel{
 	}
 	
 	private void addComboBox() {
-		String [] filters = {"Todo","A","B","C","D","E","F","G","H","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; 
+		String [] filters = {"Todo","A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; 
 		box = new JComboBox(filters);
 		box.setBounds(130,57,120,20);
 		this.add(box);

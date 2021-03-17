@@ -39,6 +39,14 @@ public class MainPanel extends JPanel{
 		title.setFont(new Font("Agency FB", Font.BOLD, 80));
 		this.add(title);
 		
+		JLabel creators = new JLabel("<html><p>Created by:</p><p>Felipe Dueñas</p><p>Freddy Ojeda</p></html>");
+		creators.setBounds(20, 450, 500, 180);
+		//creators.setHorizontalAlignment(JLabel.CENTER);
+		creators.setVerticalAlignment(JLabel.CENTER);
+		creators.setForeground(Color.WHITE);
+		creators.setFont(new Font("Agency FB", Font.BOLD, 30));
+		this.add(creators);
+		
 		JLabel subTitle = new JLabel("(Español - English)");
 		subTitle.setBounds(490, 90, 200, 50);
 		subTitle.setHorizontalAlignment(JLabel.CENTER);
