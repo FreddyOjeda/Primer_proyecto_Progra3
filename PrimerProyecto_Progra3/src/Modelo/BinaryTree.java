@@ -6,6 +6,14 @@ import java.util.Comparator;
 
 //import javax.swing.TreeNode;
 
+/**
+ * La clase BinaryTree consiste en la  creación y gestión del
+ * arbol binario, mediante diversos metodos.
+ * 
+ * @author Freddy Ojeda - Felipe Dueñas
+
+ * @param <T>
+ */
 public class BinaryTree<T> {
 
 	private TreeNode<T> root;
@@ -13,19 +21,40 @@ public class BinaryTree<T> {
 	private ArrayList<T> arrayList;
 	private int aux;
 	int cont;
+
 	
+	/**
+	 * El presente metodo consiste en el constructor de la clase
+	 * BinaryTree, el cual resibe por parametro un comparador para 
+	 * realizar diferentes funciones dentro del arbol binario, por 
+	 * otro lado, el arbol binario se crea con una raiz igual a vacio. 
+	 * 
+	 * @param comparator
+	 */
 	public BinaryTree(Comparator<T> comparator) {
-	 this.comparator=comparator;
-	 root=null;
-	 aux=0;
+		this.comparator=comparator;
+		root=null;
+		aux=0;
 	}
-  
-	
+
+	//Saber si el arbol esta vacio
+	/**
+	 * La función del metodo isEmpty consiste en determinar si el arbol esta vacio
+	 * 
+	 * @return - retorna un valor booleano para determinar el estado del arbol binario.
+	 */
 	public boolean isEmpty(){
-	return root==null;	
+		return root==null;	
 	}
-	
-	
+
+	// Agregar Nodo
+	/**
+	 * El metodo addNode recibe como parameto una info de tipo T (parametrizado),
+	 * el cual hace referencia al objeto de tipo palabra, para finalmente agregar
+	 * al arbol binario.
+	 * 
+	 * @param info - Parametro de tipo T (parametrizado).
+	 */
 	public void addNode(T info){
 		TreeNode<T>newNode=new TreeNode<T>(info);
 		if(isEmpty()){
@@ -35,19 +64,27 @@ public class BinaryTree<T> {
 			TreeNode<T> ant= null;
 			while(aux != null){
 				ant=aux;
-			aux=comparator.compare(aux.getInfo(), newNode.getInfo())>0 ? aux.getLeft():aux.getRight();
-					
+				aux=comparator.compare(aux.getInfo(), newNode.getInfo())>0 ? aux.getLeft():aux.getRight();
+
 			}
 			if(comparator.compare(ant.getInfo(), newNode.getInfo())>0){
 				ant.setLetf(newNode);
 			}else{
 				ant.setRight(newNode);
 			}
-			
+
 		}
 	}
-	
-	
+
+	// Buscar nodo
+	/**
+	 * El presente metodo se basa en buscar un nodo en el 
+	 * arbol binario.
+	 * 
+	 * @param info - recibe como parametro un valor de tipo T
+	 * @return - En caso de encontrar el nodo lo retornara, por el contrario,
+	 * si no se encuentra el nodo retornara null.
+	 */
 	public TreeNode<T> findNode(T info){
 		TreeNode<T> aux = root;
 		while( aux != null){
@@ -59,15 +96,22 @@ public class BinaryTree<T> {
 		return null;
 	}
 
-	
-	// ENLISTAR EN ORDEN 
 
+	
+	/**
+	 * El metodo listInorden consiste en enlistar el arbol binario
+	 * en orden, en este caso especifico retornara las palabra en
+	 * orden alfabetico.
+	 * 
+	 * @return - Retorna un arraylist de tipo T, haciendo referencia a
+	 * objetos de tipo Word.
+	 */
 	public ArrayList<T> listInorden(){
 		arrayList= new ArrayList<>();
 		inorden(root);
 		return arrayList;
 	}
-	
+
 	private void inorden(TreeNode<T> root) {
 		if(root != null) {
 			inorden(root.getLeft());
@@ -75,28 +119,18 @@ public class BinaryTree<T> {
 			inorden(root.getRight());
 		}
 	}
-	
-	
-	
-	
-
-	private void heigt(TreeNode<T> node,int level) {
-		if(node != null) {
-			heigt(node.getLeft(), level+1);
-			aux=level>aux?level:aux;
-			heigt(node.getRight(), level+1);
-		}
-	}
 
 
-	public int heigtNode(TreeNode<T> node) {
-		
-		heigt(node,0);
-		return aux;
-	
-	}
 
-
+	// TAMAÑOD DEL ARBOL
+	/**
+	 * El metodo weightTree consiste en que retorna el tamaño del arbol
+	 * binario, dicho de otra forma, retorna el numero de elementos que
+	 * constituyen al arbol
+	 * 
+	 * @return - Retorna un valor de tipo entero, este haciendo referencia
+	 * al tamaño del arbol.
+	 */
 	public int weightTree() {
 		return weigth(root);
 	}
@@ -110,30 +144,6 @@ public class BinaryTree<T> {
 	}
 
 
-	public int levelNode(TreeNode<T>node){
-		if(node == root){
-			return 0;
-		}else{
-			int cont=1;
-			TreeNode<T> aux=root;
-			while(aux.getLeft() != node && aux.getRight() != node){
-				cont++;
-				aux= comparator.compare(aux.getInfo(), node.getInfo())<0 ? aux.getRight():aux.getLeft();
-			}
-			return cont;
-		}
-		
-	}
-
-
-	public boolean isSheet(TreeNode<T>info){
-		if (info.getLeft()==null && info.getRight()==null) {
-			return true;
-		}else {
-		return false;
-		}
-	}
-
 
 	public byte	 gradeNode(TreeNode<T> node) {
 		if (node.getRight() != null && node.getLeft() != null) {
@@ -146,102 +156,28 @@ public class BinaryTree<T> {
 	}
 
 
-	public  ArrayList<T> listPreSort(){
-		 arrayList = new ArrayList<>();
-		 preSort(root);
-		 return arrayList;
-	 }
-	
-	
-	private void preSort(TreeNode<T> node){
-		if(node != null){
-			arrayList.add(node.getInfo());
-			preSort(node.getLeft());
-			preSort(node.getRight());
-		}
-	}
-	
-	public ArrayList<T> listInSort() {
-		arrayList = new ArrayList<>();
-		inSort(root);
-		return arrayList;
-	}
-	
-	private void inSort(TreeNode<T> node) {
-		if (node != null) {
-			inSort(node.getLeft());
-			arrayList.add(node.getInfo());
-			inSort(node.getRight());
-		}	
-	}
-	
-	public ArrayList<T> listPosort(){
-		arrayList = new ArrayList<>();
-		posort(root);
-		return arrayList;
-	}
-	
-	public void posort (TreeNode<T> node)
-	{
-		if (node!=null)
-		{
-			posort(node.getLeft());
-			posort(node.getRight());
-			arrayList.add(node.getInfo());
-		}
-	}
-	
 	public TreeNode<T> findFather(TreeNode<T> node){
-	    if ( node == root ){
-	        return null;
-	    }
-	    TreeNode< T > aux = root;
-	    while( aux.getLeft() != node && aux.getRight() != node ){
-	        aux =comparator.compare( aux.getInfo() ,node.getInfo() ) > 0 ? aux.getLeft() : aux.getRight();
-	    }
-	    
-	    return aux;
+		if ( node == root ){
+			return null;
+		}
+		TreeNode< T > aux = root;
+		while( aux.getLeft() != node && aux.getRight() != node ){
+			aux =comparator.compare( aux.getInfo() ,node.getInfo() ) > 0 ? aux.getLeft() : aux.getRight();
+		}
+
+		return aux;
 	}
 
 
-	public ArrayList<T> listAmplitudeDow(){
-		arrayList = new ArrayList<>();
-		ArrayDeque<TreeNode<T>> tail = new ArrayDeque<>();
-		tail.add(root);
-		while(! tail.isEmpty()){
-			TreeNode<T>aux= tail.poll();
-			if(aux.getLeft() !=null){
-				tail.add(aux.getLeft());
-			}
-			if( aux.getRight() != null){
-				tail.add(aux.getRight());
-			}
-			arrayList.add(aux.getInfo());
-		}
-		 	
-		return arrayList;
-		
-	}
-	
-	public ArrayList<T> listAmplitudeTop(){
-		arrayList = new ArrayList<>();
-		ArrayDeque<TreeNode<T>> tail = new ArrayDeque<>();
-		tail.add(root);
-		while(! tail.isEmpty()){
-			TreeNode<T>aux= tail.poll();
-			if(aux.getLeft() !=null){
-				tail.addFirst(aux.getLeft());
-			}
-			if( aux.getRight() != null){
-				tail.addFirst(aux.getRight());
-			}
-			arrayList.add(aux.getInfo());
-		}
-		 	
-		return arrayList;
-	}
-	
-	
+	/**
+	 * El metodo deleteNode consiste en eliminar un
+	 * nodo del arbol binario.
+	 * 
+	 * @param node - Recibe por parametro el nodo a eliminar, tipo
+	 * de valor TreeNode.
+	 * @return Retorna la información del nodo eliminado, valor de 
+	 * tipo T.
+	 */
 	public T deleteNode(TreeNode<T> node) {
 		T out=node.getInfo();
 		switch(gradeNode(node)) {
@@ -258,28 +194,28 @@ public class BinaryTree<T> {
 		return out;
 	}
 	public void deleteNodeWhithSons(TreeNode<T> node) {
-	 TreeNode<T>sustitutte= node.getRight();
-	 TreeNode<T>fatherSustitute=null;
-	 	while(sustitutte.getLeft()!=null){
-	 		fatherSustitute=sustitutte;
-	 		sustitutte=sustitutte.getLeft();
-	  }
-	 	if(fatherSustitute !=null){
-	 		fatherSustitute.setLetf(sustitutte.getRight());
-	 		sustitutte.setRight(node.getRight());
-		
-	}
-	sustitutte.setLetf(node.getLeft());
-	TreeNode<T>father=findFather(node);
+		TreeNode<T>sustitutte= node.getRight();
+		TreeNode<T>fatherSustitute=null;
+		while(sustitutte.getLeft()!=null){
+			fatherSustitute=sustitutte;
+			sustitutte=sustitutte.getLeft();
+		}
+		if(fatherSustitute !=null){
+			fatherSustitute.setLetf(sustitutte.getRight());
+			sustitutte.setRight(node.getRight());
+
+		}
+		sustitutte.setLetf(node.getLeft());
+		TreeNode<T>father=findFather(node);
 		if(father ==null){
 			root=sustitutte;
 		}else if(father.getLeft()==node){
 			father.setLetf(sustitutte);
-		
+
 		}else{
 			father.setRight(sustitutte);
-	}
-	
+		}
+
 	}
 
 
@@ -294,107 +230,19 @@ public class BinaryTree<T> {
 				father.setRight(node.getLeft()!=null?node.getLeft():node.getRight());
 			}
 		}
-		
-	}
 
+	}
 
 	private void deleteSheet(TreeNode<T> node) {
 		if(node==root) {
 			root=null;
 		}else {
-		TreeNode<T> father=findFather(node);
-		if(father.getRight()==node) {
-			father.setRight(null);
-		}else {
-			father.setLetf(null);
-		}
-	}		
-		
-	}
-	
-	public boolean isBalanced() {
-		int right = heigtNode(root.getRight());
-		int left = heigtNode(root.getLeft());
-		int rest=0;
-		if (right>=left) {
-			rest = right-left;
-		}else {
-			rest = left-right;
-		}
-		if (rest>=0 && rest<= 1) {
-			return true;
-		}
-		return false;
-	}
-	
-	public int countLeafsLevel(int level) {
-		cont = 0;
-		counter(level ,root);
-		return cont;
-	}
-	private void counter(int level,TreeNode<T> node){
-		if (node!=null) {
-			if (levelNode(node)==level && isSheet(node)) {
-				cont++;
+			TreeNode<T> father=findFather(node);
+			if(father.getRight()==node) {
+				father.setRight(null);
+			}else {
+				father.setLetf(null);
 			}
-			if(node != null){
-				counter(level, node.getLeft());
-				counter(level, node.getRight());
-			}
-		}
+		}		
 	}
-	
-	public ArrayList<T> getPath(TreeNode<T> node1, TreeNode<T> node2){
-		ArrayList<T> out = new ArrayList<>();
-		int level1=levelNode(node1);
-		int level2 = levelNode(node2);
-		if (level1>level2 || level1==0) {
-			if (isRoute(node2, node1)) {
-				while(node2!=node1) {
-					out.add(node2.getInfo());
-					node2=findFather(node2);
-				}
-				out.add(node1.getInfo());
-				return out;
-			}
-		}else if(level2>level1 || node2==root) {
-			System.out.println(isRoute(node1, node2));
-			if (isRoute(node1, node2)) {
-				while(node1!=node2) {
-					out.add(node1.getInfo());
-					node1=findFather(node1);
-				}
-				out.add(node2.getInfo());
-				return out;
-			}
-		}else if(node1==node2){
-			out.add(node1.getInfo());
-			return out;
-		}
-		return null;
-	}
-	
-	private boolean isRoute(TreeNode<T> node1,TreeNode<T> node2) {
-		boolean answer=false;
-		while(node1!=null) {
-			if (node1==node2) {
-				answer=true;
-			}
-			node1=findFather(node1);
-		}
-		return answer;
-	}
-	
-	public TreeNode<T> getGrandFather(TreeNode<T> node){
-		if (node!=null && node!=root) {
-			TreeNode<T> father =findFather(node);
-			if (father!= null && father!= root) {
-				if (findFather(father) != null) {
-					return findFather(findFather(node));
-				}
-			}
-		}
-		return null;
-	}
-	
 }
